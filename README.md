@@ -1,4 +1,4 @@
-# Council Leaders Static Site (`councilleaders.org`)
+# Startup Navigator Static Site (`sun.able.bg`)
 
 This GitHub repository hosts a static HTML version of the ABLE Startup Navigator website. ABLE's Startup Navigator project has been inactive since at least 2020. The startupnavigator.eu website was a WordPress installation, which as of March 14, 2026, was version 5.4.16 and last updated in 2022. In March 2026, Stoil Stoilov exported a static HTML version of the last working WordPress installation using the WordPress plugin Simply Static, and uploaded it to be hosted forever for free on GitHub Pages. The original startupnavigator.eu domain has been let go. This archival version of the Startup Navigator website is hosted on [sun.able.bg](https://sun.able.bg). 
 
