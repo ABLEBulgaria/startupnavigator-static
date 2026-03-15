@@ -96,9 +96,8 @@
 			var date = new Date();
 			var laterDate = new Date();
 
-			// remove listening to scroll event
-			if ( cnArgs.onScroll && this.scrollHandler )
-				window.removeEventListener( 'scroll', this.scrollHandler );
+			// Note: scroll event listener is no longer attached (notice is announcement banner)
+			// so no need to remove it here
 
 			// set cookie type and expiry time in seconds
 			if ( cookieValue === 'accept' ) {
@@ -159,24 +158,24 @@
 				} );
 			}
 
-			// redirect?
-			if ( cnArgs.redirection && ( ( cookieValue === 'true' && this.cookiesAccepted === null ) || ( cookieValue !== this.cookiesAccepted && this.cookiesAccepted !== null ) ) ) {
-				var url = window.location.protocol + '//',
-					hostname = window.location.host + '/' + window.location.pathname;
+			// redirect? - DISABLED: notice is used as announcement banner
+			// if ( cnArgs.redirection && ( ( cookieValue === 'true' && this.cookiesAccepted === null ) || ( cookieValue !== this.cookiesAccepted && this.cookiesAccepted !== null ) ) ) {
+			// 	var url = window.location.protocol + '//',
+			// 		hostname = window.location.host + '/' + window.location.pathname;
 
-				// is cache enabled?
-				if ( cnArgs.cache ) {
-					url = url + hostname.replace( '//', '/' ) + ( window.location.search === '' ? '?' : window.location.search + '&' ) + 'cn-reloaded=1' + window.location.hash;
+			// 	// is cache enabled?
+			// 	if ( cnArgs.cache ) {
+			// 		url = url + hostname.replace( '//', '/' ) + ( window.location.search === '' ? '?' : window.location.search + '&' ) + 'cn-reloaded=1' + window.location.hash;
 
-					window.location.href = url;
-				} else {
-					url = url + hostname.replace( '//', '/' ) + window.location.search + window.location.hash;
+			// 		window.location.href = url;
+			// 	} else {
+			// 		url = url + hostname.replace( '//', '/' ) + window.location.search + window.location.hash;
 
-					window.location.reload( true );
-				}
+			// 		window.location.reload( true );
+			// 	}
 
-				return;
-			}
+			// 	return;
+			// }
 		};
 
 		// get domain
@@ -410,23 +409,23 @@
 
 			// check cookies status
 			if ( this.cookiesAccepted === null ) {
-				// handle on scroll
-				if ( cnArgs.onScroll ) {
-					this.scrollHandler = function ( e ) {
-						_this.handleScroll();
-					};
-					window.addEventListener( 'scroll', this.scrollHandler );
-				}
+				// handle on scroll - DISABLED: notice is used as announcement banner
+				// if ( cnArgs.onScroll ) {
+				// 	this.scrollHandler = function ( e ) {
+				// 		_this.handleScroll();
+				// 	};
+				// 	window.addEventListener( 'scroll', this.scrollHandler );
+				// }
 
-				// handle on click
-				if ( cnArgs.onClick )
-					window.addEventListener( 'click', function ( e ) {
-						var outerContainer = _this.getClosest( e.target, '#cookie-notice' );
+				// handle on click - DISABLED: notice is used as announcement banner
+				// if ( cnArgs.onClick )
+				// 	window.addEventListener( 'click', function ( e ) {
+				// 		var outerContainer = _this.getClosest( e.target, '#cookie-notice' );
 
-						// accept notice if clicked element is not inside the container
-						if ( outerContainer === null )
-							_this.setStatus( 'accept' );
-					}, true );
+				// 		// accept notice if clicked element is not inside the container
+				// 		if ( outerContainer === null )
+				// 			_this.setStatus( 'accept' );
+				// 	}, true );
 
 				this.setBodyClass( [ 'cookies-not-set' ] );
 
