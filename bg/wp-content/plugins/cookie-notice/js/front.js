@@ -85,6 +85,9 @@
 		// notice container
 		this.noticeContainer = null;
 
+		// scroll handler reference
+		this.scrollHandler = null;
+
 		// set cookie value
 		this.setStatus = function ( cookieValue ) {
 			var _this = this;
@@ -94,8 +97,8 @@
 			var laterDate = new Date();
 
 			// remove listening to scroll event
-			if ( cnArgs.onScroll )
-				window.removeEventListener( 'scroll', this.handleScroll );
+			if ( cnArgs.onScroll && this.scrollHandler )
+				window.removeEventListener( 'scroll', this.scrollHandler );
 
 			// set cookie type and expiry time in seconds
 			if ( cookieValue === 'accept' ) {
@@ -190,18 +193,9 @@
 
 		// get cookie value
 		this.getStatus = function ( bool ) {
-			var value = "; " + document.cookie,
-				parts = value.split( '; cookie_notice_accepted=' );
-
-			if ( parts.length === 2 ) {
-				var val = parts.pop().split( ';' ).shift();
-
-				if ( bool )
-					return val === 'true';
-				else
-					return val;
-			} else
-				return null;
+			// Always return null to show the notice on every visit
+			// This makes the notice display as an announcement banner
+			return null;
 		};
 
 		// display cookie notice
@@ -417,10 +411,12 @@
 			// check cookies status
 			if ( this.cookiesAccepted === null ) {
 				// handle on scroll
-				if ( cnArgs.onScroll )
-					window.addEventListener( 'scroll', function ( e ) {
+				if ( cnArgs.onScroll ) {
+					this.scrollHandler = function ( e ) {
 						_this.handleScroll();
-					} );
+					};
+					window.addEventListener( 'scroll', this.scrollHandler );
+				}
 
 				// handle on click
 				if ( cnArgs.onClick )
